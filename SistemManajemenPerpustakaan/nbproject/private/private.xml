@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/Carbon/OneDrive/Documents/NetBeansProjects/Sistem-Manajemen-Perpustakaan/SistemManajemenPerpustakaan/src/model/buku/Buku.java</file>
+            <file>file:/C:/Users/Carbon/OneDrive/Documents/NetBeansProjects/Sistem-Manajemen-Perpustakaan/SistemManajemenPerpustakaan/src/dao/DaoTransaksi.java</file>
+            <file>file:/C:/Users/Carbon/OneDrive/Documents/NetBeansProjects/Sistem-Manajemen-Perpustakaan/SistemManajemenPerpustakaan/src/dao/DaoBuku.java</file>
+            <file>file:/C:/Users/Carbon/OneDrive/Documents/NetBeansProjects/Sistem-Manajemen-Perpustakaan/SistemManajemenPerpustakaan/src/model/buku/Kategori.java</file>
+            <file>file:/C:/Users/Carbon/OneDrive/Documents/NetBeansProjects/Sistem-Manajemen-Perpustakaan/SistemManajemenPerpustakaan/src/model/pengguna/Pustakawan.java</file>
+            <file>file:/C:/Users/Carbon/OneDrive/Documents/NetBeansProjects/Sistem-Manajemen-Perpustakaan/SistemManajemenPerpustakaan/src/utilitas/Connector.java</file>
+            <file>file:/C:/Users/Carbon/OneDrive/Documents/NetBeansProjects/Sistem-Manajemen-Perpustakaan/SistemManajemenPerpustakaan/src/model/anggota/Anggota.java</file>
+            <file>file:/C:/Users/Carbon/OneDrive/Documents/NetBeansProjects/Sistem-Manajemen-Perpustakaan/SistemManajemenPerpustakaan/src/model/pengguna/Admin.java</file>
+            <file>file:/C:/Users/Carbon/OneDrive/Documents/NetBeansProjects/Sistem-Manajemen-Perpustakaan/SistemManajemenPerpustakaan/src/dao/DaoAnggota.java</file>
+            <file>file:/C:/Users/Carbon/OneDrive/Documents/NetBeansProjects/Sistem-Manajemen-Perpustakaan/SistemManajemenPerpustakaan/src/dao/DaoPengguna.java</file>
+            <file>file:/C:/Users/Carbon/OneDrive/Documents/NetBeansProjects/Sistem-Manajemen-Perpustakaan/SistemManajemenPerpustakaan/src/model/transaksi/Transaksi.java</file>
+            <file>file:/C:/Users/Carbon/OneDrive/Documents/NetBeansProjects/Sistem-Manajemen-Perpustakaan/SistemManajemenPerpustakaan/src/dao/DaoKategori.java</file>
+            <file>file:/C:/Users/Carbon/OneDrive/Documents/NetBeansProjects/Sistem-Manajemen-Perpustakaan/SistemManajemenPerpustakaan/src/dao/DaoInduk.java</file>
+            <file>file:/C:/Users/Carbon/OneDrive/Documents/NetBeansProjects/Sistem-Manajemen-Perpustakaan/SistemManajemenPerpustakaan/src/model/Orang.java</file>
+        </group>
+    </open-files>
+</project-private>
