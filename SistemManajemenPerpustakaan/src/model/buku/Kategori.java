@@ -44,6 +44,6 @@ public class Kategori {
 
     @Override
     public String toString() {
-        return "Kategori{id=" + id + ", nama='" + nama + "'}";
-    }
+    return nama;
+}
 }
