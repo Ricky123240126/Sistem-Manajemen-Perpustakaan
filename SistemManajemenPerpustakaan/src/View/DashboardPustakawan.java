@@ -18,7 +18,7 @@ public class DashboardPustakawan extends JFrame {
 
     private JPanel contentPanel;
     private CardLayout cardLayout;
-
+    private TransaksiPanel transaksiPanel;
     public DashboardPustakawan() {
         initComponents();
 
@@ -71,6 +71,7 @@ public class DashboardPustakawan extends JFrame {
         contentPanel.add(new DashboardHomePanel(), "DASHBOARD");
         contentPanel.add(new BukuPanel(), "BUKU");
         contentPanel.add(new AnggotaPanel(), "ANGGOTA");
+        transaksiPanel = new TransaksiPanel();
         contentPanel.add(new TransaksiPanel(), "TRANSAKSI");
 
         // EVENT
@@ -86,9 +87,11 @@ public class DashboardPustakawan extends JFrame {
                 e -> cardLayout.show(contentPanel, "ANGGOTA")
         );
 
-        btnTransaksi.addActionListener(
-                e -> cardLayout.show(contentPanel, "TRANSAKSI")
-        );
+        btnTransaksi.addActionListener(e -> {
+            transaksiPanel.refreshData();
+
+            cardLayout.show(contentPanel,"TRANSAKSI");
+        });
 
         btnLogout.addActionListener(e -> {
 

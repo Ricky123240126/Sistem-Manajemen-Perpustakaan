@@ -267,4 +267,9 @@ public class TransaksiPanel extends JPanel {
             JOptionPane.showMessageDialog(this, "Pengembalian gagal");
         }
     }
+    public void refreshData() {
+    loadComboBox();
+    loadDipinjam();
+    loadRiwayat();
+    }
 }

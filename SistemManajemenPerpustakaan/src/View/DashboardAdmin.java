@@ -19,6 +19,7 @@ public class DashboardAdmin extends JFrame {
 
     private JPanel contentPanel;
     private CardLayout cardLayout;
+    private TransaksiPanel transaksiPanel;
 
     public DashboardAdmin() {
         initComponents();
@@ -78,7 +79,8 @@ public class DashboardAdmin extends JFrame {
         contentPanel.add(new KategoriPanel(), "KATEGORI");
         contentPanel.add(new AnggotaPanel(), "ANGGOTA");
         contentPanel.add(new PenggunaPanel(), "PENGGUNA");
-        contentPanel.add(new TransaksiPanel(), "TRANSAKSI");
+        transaksiPanel = new TransaksiPanel();
+        contentPanel.add(transaksiPanel,"TRANSAKSI");
 
         // EVENT
         btnDashboard.addActionListener(
@@ -101,10 +103,11 @@ public class DashboardAdmin extends JFrame {
                 e -> cardLayout.show(contentPanel, "PENGGUNA")
         );
 
-        btnTransaksi.addActionListener(
-                e -> cardLayout.show(contentPanel, "TRANSAKSI")
-        );
+        btnTransaksi.addActionListener(e -> {
+            transaksiPanel.refreshData();
 
+            cardLayout.show(contentPanel,"TRANSAKSI");
+        });
         btnLogout.addActionListener(e -> {
 
             int konfirmasi = JOptionPane.showConfirmDialog(
