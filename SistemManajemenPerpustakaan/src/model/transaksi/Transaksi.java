@@ -13,11 +13,26 @@ public class Transaksi {
     private int id;
     private int idBuku;
     private int idAnggota;
+    private String judulBuku;
+    private String namaAnggota;
     private String tanggalPinjam; 
     private String tanggalJatuhTempo;
     private String tanggalKembali; // Bisa null jika belum dikembalikan
     private String status; // 'dipinjam', 'dikembalikan', 'terlambat'
     private int denda;
+    
+    public String getJudulBuku() {
+        return judulBuku; 
+    }
+    public void setJudulBuku(String judulBuku) {
+        this.judulBuku = judulBuku; 
+    }
+    public String getNamaAnggota() {
+        return namaAnggota; 
+    }
+    public void setNamaAnggota(String namaAnggota) {
+        this.namaAnggota = namaAnggota; 
+    }
 
     // 2. Constructor Kosong
     public Transaksi() {

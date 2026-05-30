@@ -7,7 +7,6 @@ import model.transaksi.Transaksi;
 import utilitas.Connector;
  
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 /**
@@ -28,8 +27,8 @@ public class DaoTransaksi extends DaoInduk<Transaksi>{
         try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
             ps.setInt(1, transaksi.getIdBuku());
             ps.setInt(2, transaksi.getIdAnggota());
-            ps.setDate(3, Date.valueOf(transaksi.getTanggalPinjam()));
-            ps.setDate(4, Date.valueOf(transaksi.getTanggalJatuhTempo()));
+            ps.setString(3, transaksi.getTanggalPinjam());
+            ps.setString(4, transaksi.getTanggalJatuhTempo());
             ps.setString(5, transaksi.getStatus());
             ps.setInt(6, transaksi.getDenda());
             ps.executeUpdate();
@@ -42,8 +41,7 @@ public class DaoTransaksi extends DaoInduk<Transaksi>{
     public void perbarui(Transaksi transaksi) {
         String sql = "UPDATE transaksi SET tanggal_kembali = ?, status = ?, denda = ? WHERE id = ?";
         try (PreparedStatement ps = koneksi.prepareStatement(sql)) {
-            ps.setDate(1, transaksi.getTanggalKembali() != null
-                ? Date.valueOf(transaksi.getTanggalKembali()) : null);
+            ps.setString(1, transaksi.getTanggalKembali());
             ps.setString(2, transaksi.getStatus());
             ps.setInt(3, transaksi.getDenda());
             ps.setInt(4, transaksi.getId());
