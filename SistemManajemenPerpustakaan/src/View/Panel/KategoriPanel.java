@@ -34,7 +34,6 @@ public class KategoriPanel extends JPanel {
     private int selectedId = -1;
 
     public KategoriPanel() {
-
         kategoriController = new KategoriController();
 
         initComponents();
@@ -42,62 +41,35 @@ public class KategoriPanel extends JPanel {
     }
 
     private void initComponents() {
-
         setLayout(new BorderLayout());
-        setBackground(new Color(248,250,252));
+        setBackground(new Color(248, 250, 252));
 
         JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBorder(new EmptyBorder(15,15,15,15));
+        mainPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        // ===================================
         // JUDUL
-        // ===================================
         JLabel lblTitle = new JLabel("Data Kategori");
         lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 24));
 
-        // ===================================
         // FORM
-        // ===================================
-        JPanel formPanel = new JPanel(
-                new GridBagLayout()
-        );
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        formPanel.setBorder(BorderFactory.createTitledBorder("Form Kategori"));
 
-        formPanel.setBorder(
-                BorderFactory.createTitledBorder(
-                        "Form Kategori"
-                )
-        );
-
-        GridBagConstraints gbc =
-                new GridBagConstraints();
-
-        gbc.insets = new Insets(5,5,5,5);
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
         txtNamaKategori = new JTextField(30);
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        formPanel.add(
-                new JLabel("Nama Kategori"),
-                gbc
-        );
+        formPanel.add(new JLabel("Nama Kategori"), gbc);
 
         gbc.gridx = 1;
-        gbc.gridy = 0;
-        formPanel.add(
-                txtNamaKategori,
-                gbc
-        );
+        formPanel.add(txtNamaKategori, gbc);
 
-        // ===================================
         // BUTTON
-        // ===================================
-        JPanel buttonPanel = new JPanel(
-                new FlowLayout(
-                        FlowLayout.LEFT
-                )
-        );
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         btnTambah = new JButton("Tambah");
         btnEdit = new JButton("Simpan Perubahan");
@@ -109,130 +81,72 @@ public class KategoriPanel extends JPanel {
         buttonPanel.add(btnHapus);
         buttonPanel.add(btnReset);
 
-        // ===================================
         // TABLE
-        // ===================================
         String[] kolom = {
                 "ID",
                 "Nama Kategori"
         };
 
-        tableModel =
-                new DefaultTableModel(
-                        kolom,
-                        0
-                ) {
+        tableModel = new DefaultTableModel(kolom, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
-                    @Override
-                    public boolean isCellEditable(
-                            int row,
-                            int column
-                    ) {
-                        return false;
-                    }
-                };
-
-        tableKategori =
-                new JTable(tableModel);
-
+        tableKategori = new JTable(tableModel);
         tableKategori.setRowHeight(28);
 
-        JScrollPane scrollPane =
-                new JScrollPane(tableKategori);
+        JScrollPane scrollPane = new JScrollPane(tableKategori);
 
-        // ===================================
         // TOP PANEL
-        // ===================================
         JPanel topPanel = new JPanel();
 
-        topPanel.setLayout(
-                new BoxLayout(
-                        topPanel,
-                        BoxLayout.Y_AXIS
-                )
-        );
+        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
 
         topPanel.add(lblTitle);
         topPanel.add(Box.createVerticalStrut(10));
         topPanel.add(formPanel);
         topPanel.add(buttonPanel);
 
-        mainPanel.add(
-                topPanel,
-                BorderLayout.NORTH
-        );
-
-        mainPanel.add(
-                scrollPane,
-                BorderLayout.CENTER
-        );
+        mainPanel.add(topPanel, BorderLayout.NORTH);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
 
         add(mainPanel);
 
-        // ===================================
         // EVENT
-        // ===================================
-        btnTambah.addActionListener(
-                e -> tambahData()
-        );
+        btnTambah.addActionListener(e -> tambahData());
+        btnEdit.addActionListener(e -> editData());
+        btnHapus.addActionListener(e -> hapusData());
+        btnReset.addActionListener(e -> clearForm());
 
-        btnEdit.addActionListener(
-                e -> editData()
-        );
-
-        btnHapus.addActionListener(
-                e -> hapusData()
-        );
-
-        btnReset.addActionListener(
-                e -> clearForm()
-        );
-
-        tableKategori
-                .getSelectionModel()
-                .addListSelectionListener(e -> {
-
-                    if(!e.getValueIsAdjusting()) {
-
-                        isiFormDariTabel();
-                    }
-                });
+        tableKategori.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                isiFormDariTabel();
+            }
+        });
     }
 
     private void loadData() {
-
         tableModel.setRowCount(0);
 
-        List<Kategori> daftar =
-                kategoriController
-                        .ambilSemuaKategori();
+        List<Kategori> daftar = kategoriController.ambilSemuaKategori();
 
-        for(Kategori kategori : daftar) {
-
-            tableModel.addRow(
-                    new Object[]{
-                            kategori.getId(),
-                            kategori.getNama()
-                    }
-            );
+        for (Kategori kategori : daftar) {
+            tableModel.addRow(new Object[]{
+                    kategori.getId(),
+                    kategori.getNama()
+            });
         }
     }
 
     private void tambahData() {
+        boolean berhasil = kategoriController.tambahKategori(
+                txtNamaKategori.getText()
+        );
 
-        boolean berhasil =
-                kategoriController
-                        .tambahKategori(
-                                txtNamaKategori
-                                        .getText()
-                        );
-
-        if(berhasil) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Kategori berhasil ditambahkan."
-            );
+        if (berhasil) {
+            JOptionPane.showMessageDialog(this, "Kategori berhasil ditambahkan.");
 
             loadData();
             clearForm();
@@ -240,31 +154,18 @@ public class KategoriPanel extends JPanel {
     }
 
     private void editData() {
-
-        if(selectedId == -1) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Pilih data terlebih dahulu."
-            );
-
+        if (selectedId == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih data terlebih dahulu.");
             return;
         }
 
-        boolean berhasil =
-                kategoriController
-                        .perbaruiKategori(
-                                selectedId,
-                                txtNamaKategori
-                                        .getText()
-                        );
+        boolean berhasil = kategoriController.perbaruiKategori(
+                selectedId,
+                txtNamaKategori.getText()
+        );
 
-        if(berhasil) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Kategori berhasil diperbarui."
-            );
+        if (berhasil) {
+            JOptionPane.showMessageDialog(this, "Kategori berhasil diperbarui.");
 
             loadData();
             clearForm();
@@ -272,46 +173,28 @@ public class KategoriPanel extends JPanel {
     }
 
     private void hapusData() {
-
-        if(selectedId == -1) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Pilih data terlebih dahulu."
-            );
-
+        if (selectedId == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih data terlebih dahulu.");
             return;
         }
 
-        int konfirmasi =
-                JOptionPane.showConfirmDialog(
-                        this,
-                        "Hapus kategori ini ?",
-                        "Konfirmasi",
-                        JOptionPane.YES_NO_OPTION
-                );
+        int konfirmasi = JOptionPane.showConfirmDialog(
+                this,
+                "Hapus kategori ini ?",
+                "Konfirmasi",
+                JOptionPane.YES_NO_OPTION
+        );
 
-        if(konfirmasi ==
-                JOptionPane.YES_OPTION) {
+        if (konfirmasi == JOptionPane.YES_OPTION) {
 
-            boolean berhasil =
-                    kategoriController
-                            .hapusKategori(
-                                    selectedId
-                            );
+            boolean berhasil = kategoriController.hapusKategori(selectedId);
 
-            if(berhasil) {
-
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Kategori berhasil dihapus."
-                );
+            if (berhasil) {
+                JOptionPane.showMessageDialog(this, "Kategori berhasil dihapus.");
 
                 loadData();
                 clearForm();
-            }
-            else {
-
+            } else {
                 JOptionPane.showMessageDialog(
                         this,
                         "Kategori gagal dihapus.\nKemungkinan masih digunakan oleh data buku."
@@ -321,36 +204,20 @@ public class KategoriPanel extends JPanel {
     }
 
     private void isiFormDariTabel() {
+        int row = tableKategori.getSelectedRow();
 
-        int row =
-                tableKategori
-                        .getSelectedRow();
+        if (row == -1) return;
 
-        if(row == -1) return;
-
-        selectedId =
-                Integer.parseInt(
-                        tableModel
-                                .getValueAt(
-                                        row,
-                                        0
-                                )
-                                .toString()
-                );
-
-        Kategori kategori =
-                kategoriController
-                        .cariKategori(
-                                selectedId
-                        );
-
-        txtNamaKategori.setText(
-                kategori.getNama()
+        selectedId = Integer.parseInt(
+                tableModel.getValueAt(row, 0).toString()
         );
+
+        Kategori kategori = kategoriController.cariKategori(selectedId);
+
+        txtNamaKategori.setText(kategori.getNama());
     }
 
     private void clearForm() {
-
         selectedId = -1;
 
         txtNamaKategori.setText("");

@@ -40,322 +40,157 @@ public class PenggunaPanel extends JPanel {
     private int selectedId = -1;
 
     public PenggunaPanel() {
-
-        penggunaController =
-                new PenggunaController();
+        penggunaController = new PenggunaController();
 
         initComponents();
         loadData();
     }
 
     private void initComponents() {
-
         setLayout(new BorderLayout());
 
-        JPanel mainPanel =
-                new JPanel(
-                        new BorderLayout()
-                );
+        JPanel mainPanel = new JPanel(new BorderLayout());
+        mainPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        mainPanel.setBorder(
-                new EmptyBorder(
-                        15,15,15,15
-                )
-        );
+        JLabel lblTitle = new JLabel("Data Pengguna");
+        lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 24));
 
-        JLabel lblTitle =
-                new JLabel(
-                        "Data Pengguna"
-                );
-
-        lblTitle.setFont(
-                new Font(
-                        "Segoe UI",
-                        Font.BOLD,
-                        24
-                )
-        );
-
-        // ======================
         // FORM
-        // ======================
-        JPanel formPanel =
-                new JPanel(
-                        new GridBagLayout()
-                );
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        formPanel.setBorder(BorderFactory.createTitledBorder("Form Pengguna"));
 
-        formPanel.setBorder(
-                BorderFactory.createTitledBorder(
-                        "Form Pengguna"
-                )
-        );
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        GridBagConstraints gbc =
-                new GridBagConstraints();
+        txtUsername = new JTextField();
+        txtPassword = new JPasswordField(15);
 
-        gbc.insets =
-                new Insets(
-                        5,5,5,5
-                );
+        cbRole = new JComboBox<>(new String[]{
+                "admin",
+                "pustakawan"
+        });
 
-        gbc.fill =
-                GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formPanel.add(new JLabel("Username"), gbc);
 
-        txtUsername =
-                new JTextField();
+        gbc.gridx = 1;
+        formPanel.add(txtUsername, gbc);
 
-        txtPassword =
-                new JPasswordField();
+        gbc.gridx = 2;
+        formPanel.add(new JLabel("Password"), gbc);
 
-        cbRole =
-                new JComboBox<>(
-                        new String[]{
-                                "admin",
-                                "pustakawan"
-                        }
-                );
+        gbc.gridx = 3;
+        formPanel.add(txtPassword, gbc);
 
-        gbc.gridx=0;
-        gbc.gridy=0;
-        formPanel.add(
-                new JLabel("Username"),
-                gbc
-        );
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        formPanel.add(new JLabel("Role"), gbc);
 
-        gbc.gridx=1;
-        formPanel.add(
-                txtUsername,
-                gbc
-        );
+        gbc.gridx = 1;
+        formPanel.add(cbRole, gbc);
 
-        gbc.gridx=2;
-        formPanel.add(
-                new JLabel("Password"),
-                gbc
-        );
-
-        gbc.gridx=3;
-        formPanel.add(
-                txtPassword,
-                gbc
-        );
-
-        gbc.gridx=0;
-        gbc.gridy=1;
-        formPanel.add(
-                new JLabel("Role"),
-                gbc
-        );
-
-        gbc.gridx=1;
-        formPanel.add(
-                cbRole,
-                gbc
-        );
-
-        // ======================
         // BUTTON
-        // ======================
-        JPanel buttonPanel =
-                new JPanel(
-                        new FlowLayout(
-                                FlowLayout.LEFT
-                        )
-                );
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-        btnTambah =
-                new JButton("Tambah");
-
-        btnUbahPassword =
-                new JButton(
-                        "Ubah Password"
-                );
-
-        btnHapus =
-                new JButton("Hapus");
-
-        btnReset =
-                new JButton("Reset");
+        btnTambah = new JButton("Tambah");
+        btnUbahPassword = new JButton("Ubah Password");
+        btnHapus = new JButton("Hapus");
+        btnReset = new JButton("Reset");
 
         buttonPanel.add(btnTambah);
         buttonPanel.add(btnUbahPassword);
         buttonPanel.add(btnHapus);
         buttonPanel.add(btnReset);
 
-        // ======================
         // TABLE
-        // ======================
         String[] kolom = {
                 "ID",
                 "Username",
                 "Role"
         };
 
-        tableModel =
-                new DefaultTableModel(
-                        kolom,
-                        0
-                ) {
+        tableModel = new DefaultTableModel(kolom, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
-                    @Override
-                    public boolean isCellEditable(
-                            int row,
-                            int column
-                    ) {
-                        return false;
-                    }
-                };
-
-        tablePengguna =
-                new JTable(tableModel);
-
+        tablePengguna = new JTable(tableModel);
         tablePengguna.setRowHeight(28);
 
-        JScrollPane scrollPane =
-                new JScrollPane(
-                        tablePengguna
-                );
+        JScrollPane scrollPane = new JScrollPane(tablePengguna);
 
-        JPanel topPanel =
-                new JPanel();
-
-        topPanel.setLayout(
-                new BoxLayout(
-                        topPanel,
-                        BoxLayout.Y_AXIS
-                )
-        );
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
 
         topPanel.add(lblTitle);
-        topPanel.add(
-                Box.createVerticalStrut(10)
-        );
+        topPanel.add(Box.createVerticalStrut(10));
         topPanel.add(formPanel);
         topPanel.add(buttonPanel);
 
-        mainPanel.add(
-                topPanel,
-                BorderLayout.NORTH
-        );
-
-        mainPanel.add(
-                scrollPane,
-                BorderLayout.CENTER
-        );
+        mainPanel.add(topPanel, BorderLayout.NORTH);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
 
         add(mainPanel);
 
-        // ======================
         // EVENT
-        // ======================
-        btnTambah.addActionListener(
-                e -> tambahData()
-        );
+        btnTambah.addActionListener(e -> tambahData());
+        btnUbahPassword.addActionListener(e -> ubahPassword());
+        btnHapus.addActionListener(e -> hapusData());
+        btnReset.addActionListener(e -> clearForm());
 
-        btnUbahPassword.addActionListener(
-                e -> ubahPassword()
-        );
-
-        btnHapus.addActionListener(
-                e -> hapusData()
-        );
-
-        btnReset.addActionListener(
-                e -> clearForm()
-        );
-
-        tablePengguna
-                .getSelectionModel()
-                .addListSelectionListener(
-                        e -> {
-
-                            if(!e.getValueIsAdjusting()) {
-
-                                isiForm();
-                            }
-                        }
-                );
+        tablePengguna.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                isiForm();
+            }
+        });
     }
 
     private void loadData() {
-
         tableModel.setRowCount(0);
 
-        List<Orang> daftar =
-                penggunaController
-                        .ambilSemuaPengguna();
+        List<Orang> daftar = penggunaController.ambilSemuaPengguna();
 
-        for(Orang orang : daftar) {
+        for (Orang orang : daftar) {
 
             String username;
             String role;
 
-            if(orang instanceof Admin admin) {
-
-                username =
-                        admin.getUsername();
-
+            if (orang instanceof Admin admin) {
+                username = admin.getUsername();
                 role = "Admin";
-
             } else {
+                Pustakawan pustakawan = (Pustakawan) orang;
 
-                Pustakawan pustakawan =
-                        (Pustakawan) orang;
-
-                username =
-                        pustakawan.getUsername();
-
+                username = pustakawan.getUsername();
                 role = "Pustakawan";
             }
 
-            tableModel.addRow(
-                    new Object[]{
-                            orang.getId(),
-                            username,
-                            role
-                    }
-            );
+            tableModel.addRow(new Object[]{
+                    orang.getId(),
+                    username,
+                    role
+            });
         }
     }
 
     private void tambahData() {
-
-        String username =
-                txtUsername.getText();
-
-        String password =
-                String.valueOf(
-                        txtPassword.getPassword()
-                );
+        String username = txtUsername.getText();
+        String password = String.valueOf(txtPassword.getPassword());
 
         boolean berhasil;
 
-        if(cbRole.getSelectedItem()
-                .equals("admin")) {
-
-            berhasil =
-                    penggunaController
-                            .tambahAdmin(
-                                    username,
-                                    password
-                            );
-
+        if (cbRole.getSelectedItem().equals("admin")) {
+            berhasil = penggunaController.tambahAdmin(username, password);
         } else {
-
-            berhasil =
-                    penggunaController
-                            .tambahPustakawan(
-                                    username,
-                                    password
-                            );
+            berhasil = penggunaController.tambahPustakawan(username, password);
         }
 
-        if(berhasil) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Pengguna berhasil ditambahkan"
-            );
+        if (berhasil) {
+            JOptionPane.showMessageDialog(this, "Pengguna berhasil ditambahkan");
 
             loadData();
             clearForm();
@@ -363,41 +198,23 @@ public class PenggunaPanel extends JPanel {
     }
 
     private void ubahPassword() {
-
-        if(selectedId == -1) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Pilih pengguna terlebih dahulu"
-            );
-
+        if (selectedId == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih pengguna terlebih dahulu");
             return;
         }
 
-        Orang pengguna =
-                penggunaController
-                        .cariPengguna(
-                                selectedId
-                        );
+        Orang pengguna = penggunaController.cariPengguna(selectedId);
 
-        String passwordBaru =
-                String.valueOf(
-                        txtPassword.getPassword()
-                );
+        String passwordBaru = String.valueOf(txtPassword.getPassword());
 
         boolean berhasil =
-                penggunaController
-                        .ubahPassword(
-                                pengguna,
-                                passwordBaru
-                        );
+                penggunaController.ubahPassword(
+                        pengguna,
+                        passwordBaru
+                );
 
-        if(berhasil) {
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Password berhasil diubah"
-            );
+        if (berhasil) {
+            JOptionPane.showMessageDialog(this, "Password berhasil diubah");
 
             loadData();
             clearForm();
@@ -405,31 +222,17 @@ public class PenggunaPanel extends JPanel {
     }
 
     private void hapusData() {
+        if (selectedId == -1) return;
 
-        if(selectedId == -1) return;
+        if (JOptionPane.showConfirmDialog(
+                this,
+                "Hapus pengguna?",
+                "Konfirmasi",
+                JOptionPane.YES_NO_OPTION
+        ) == JOptionPane.YES_OPTION) {
 
-        if(
-                JOptionPane.showConfirmDialog(
-                        this,
-                        "Hapus pengguna?",
-                        "Konfirmasi",
-                        JOptionPane.YES_NO_OPTION
-                )
-                ==
-                JOptionPane.YES_OPTION
-        ) {
-
-            if(
-                    penggunaController
-                            .hapusPengguna(
-                                    selectedId
-                            )
-            ) {
-
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Pengguna berhasil dihapus"
-                );
+            if (penggunaController.hapusPengguna(selectedId)) {
+                JOptionPane.showMessageDialog(this, "Pengguna berhasil dihapus");
 
                 loadData();
                 clearForm();
@@ -438,64 +241,33 @@ public class PenggunaPanel extends JPanel {
     }
 
     private void isiForm() {
+        int row = tablePengguna.getSelectedRow();
 
-        int row =
-                tablePengguna
-                        .getSelectedRow();
+        if (row == -1) return;
 
-        if(row == -1) return;
+        selectedId = Integer.parseInt(
+                tableModel.getValueAt(row, 0).toString()
+        );
 
-        selectedId =
-                Integer.parseInt(
-                        tableModel
-                                .getValueAt(
-                                        row,
-                                        0
-                                )
-                                .toString()
-                );
+        Orang pengguna = penggunaController.cariPengguna(selectedId);
 
-        Orang pengguna =
-                penggunaController
-                        .cariPengguna(
-                                selectedId
-                        );
+        if (pengguna instanceof Admin admin) {
 
-        if(pengguna instanceof Admin admin) {
-
-            txtUsername.setText(
-                    admin.getUsername()
-            );
-
-            txtPassword.setText(
-                    admin.getPassword()
-            );
-
-            cbRole.setSelectedItem(
-                    "admin"
-            );
+            txtUsername.setText(admin.getUsername());
+            txtPassword.setText(admin.getPassword());
+            cbRole.setSelectedItem("admin");
 
         } else {
 
-            Pustakawan pustakawan =
-                    (Pustakawan) pengguna;
+            Pustakawan pustakawan = (Pustakawan) pengguna;
 
-            txtUsername.setText(
-                    pustakawan.getUsername()
-            );
-
-            txtPassword.setText(
-                    pustakawan.getPassword()
-            );
-
-            cbRole.setSelectedItem(
-                    "pustakawan"
-            );
+            txtUsername.setText(pustakawan.getUsername());
+            txtPassword.setText(pustakawan.getPassword());
+            cbRole.setSelectedItem("pustakawan");
         }
     }
 
     private void clearForm() {
-
         selectedId = -1;
 
         txtUsername.setText("");

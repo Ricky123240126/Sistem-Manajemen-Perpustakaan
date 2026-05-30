@@ -15,11 +15,11 @@ import java.awt.*;
  * @author Lenovo
  */
 public class DashboardPustakawan extends JFrame {
+
     private JPanel contentPanel;
     private CardLayout cardLayout;
 
     public DashboardPustakawan() {
-
         initComponents();
 
         setTitle("Dashboard Pustakawan");
@@ -29,67 +29,33 @@ public class DashboardPustakawan extends JFrame {
     }
 
     private void initComponents() {
-
         setLayout(new BorderLayout());
 
-        // ==========================
         // HEADER
-        // ==========================
         JPanel headerPanel = new JPanel(new BorderLayout());
 
-        headerPanel.setBackground(
-                new Color(51, 65, 85)
-        );
+        headerPanel.setBackground(new Color(51, 65, 85));
+        headerPanel.setPreferredSize(new Dimension(0, 60));
 
-        headerPanel.setPreferredSize(
-                new Dimension(0, 60)
-        );
-
-        JLabel lblTitle =
-                new JLabel("  SISTEM INFORMASI PERPUSTAKAAN");
+        JLabel lblTitle = new JLabel("  SISTEM INFORMASI PERPUSTAKAAN");
 
         lblTitle.setForeground(Color.WHITE);
+        lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 20));
 
-        lblTitle.setFont(
-                new Font("Segoe UI", Font.BOLD, 20)
-        );
+        headerPanel.add(lblTitle, BorderLayout.WEST);
 
-        headerPanel.add(
-                lblTitle,
-                BorderLayout.WEST
-        );
-
-        // ==========================
         // SIDEBAR
-        // ==========================
         JPanel sidebarPanel = new JPanel();
 
-        sidebarPanel.setBackground(
-                new Color(30, 41, 59)
-        );
+        sidebarPanel.setBackground(new Color(30, 41, 59));
+        sidebarPanel.setPreferredSize(new Dimension(220, 0));
+        sidebarPanel.setLayout(new GridLayout(5, 1, 0, 5));
 
-        sidebarPanel.setPreferredSize(
-                new Dimension(220, 0)
-        );
-
-        sidebarPanel.setLayout(
-                new GridLayout(5, 1, 0, 5)
-        );
-
-        JButton btnDashboard =
-                buatMenuButton("Dashboard");
-
-        JButton btnBuku =
-                buatMenuButton("Buku");
-
-        JButton btnAnggota =
-                buatMenuButton("Anggota");
-
-        JButton btnTransaksi =
-                buatMenuButton("Transaksi");
-
-        JButton btnLogout =
-                buatMenuButton("Logout");
+        JButton btnDashboard = buatMenuButton("Dashboard");
+        JButton btnBuku = buatMenuButton("Buku");
+        JButton btnAnggota = buatMenuButton("Anggota");
+        JButton btnTransaksi = buatMenuButton("Transaksi");
+        JButton btnLogout = buatMenuButton("Logout");
 
         sidebarPanel.add(btnDashboard);
         sidebarPanel.add(btnBuku);
@@ -97,75 +63,44 @@ public class DashboardPustakawan extends JFrame {
         sidebarPanel.add(btnTransaksi);
         sidebarPanel.add(btnLogout);
 
-        // ==========================
         // CONTENT PANEL
-        // ==========================
         cardLayout = new CardLayout();
 
         contentPanel = new JPanel(cardLayout);
 
-        contentPanel.add(
-                new DashboardHomePanel(),
-                "DASHBOARD"
-        );
+        contentPanel.add(new DashboardHomePanel(), "DASHBOARD");
+        contentPanel.add(new BukuPanel(), "BUKU");
+        contentPanel.add(new AnggotaPanel(), "ANGGOTA");
+        contentPanel.add(new TransaksiPanel(), "TRANSAKSI");
 
-        contentPanel.add(
-                new BukuPanel(),
-                "BUKU"
-        );
-
-        contentPanel.add(
-                new AnggotaPanel(),
-                "ANGGOTA"
-        );
-
-        contentPanel.add(
-                new TransaksiPanel(),
-                "TRANSAKSI"
-        );
-
-        // ==========================
         // EVENT
-        // ==========================
         btnDashboard.addActionListener(
-                e -> cardLayout.show(
-                        contentPanel,
-                        "DASHBOARD")
+                e -> cardLayout.show(contentPanel, "DASHBOARD")
         );
 
         btnBuku.addActionListener(
-                e -> cardLayout.show(
-                        contentPanel,
-                        "BUKU")
+                e -> cardLayout.show(contentPanel, "BUKU")
         );
 
         btnAnggota.addActionListener(
-                e -> cardLayout.show(
-                        contentPanel,
-                        "ANGGOTA")
+                e -> cardLayout.show(contentPanel, "ANGGOTA")
         );
 
         btnTransaksi.addActionListener(
-                e -> cardLayout.show(
-                        contentPanel,
-                        "TRANSAKSI")
+                e -> cardLayout.show(contentPanel, "TRANSAKSI")
         );
 
         btnLogout.addActionListener(e -> {
 
-            int konfirmasi =
-                    JOptionPane.showConfirmDialog(
-                            this,
-                            "Yakin ingin logout?",
-                            "Logout",
-                            JOptionPane.YES_NO_OPTION
-                    );
+            int konfirmasi = JOptionPane.showConfirmDialog(
+                    this,
+                    "Yakin ingin logout?",
+                    "Logout",
+                    JOptionPane.YES_NO_OPTION
+            );
 
-            if (konfirmasi ==
-                    JOptionPane.YES_OPTION) {
-
+            if (konfirmasi == JOptionPane.YES_OPTION) {
                 new LoginView().setVisible(true);
-
                 dispose();
             }
         });
@@ -176,26 +111,14 @@ public class DashboardPustakawan extends JFrame {
     }
 
     private JButton buatMenuButton(String text) {
-
         JButton button = new JButton(text);
 
         button.setFocusPainted(false);
-
         button.setBorderPainted(false);
-
         button.setForeground(Color.WHITE);
 
-        button.setBackground(
-                new Color(30, 41, 59)
-        );
-
-        button.setFont(
-                new Font(
-                        "Segoe UI",
-                        Font.PLAIN,
-                        15
-                )
-        );
+        button.setBackground(new Color(30, 41, 59));
+        button.setFont(new Font("Segoe UI", Font.PLAIN, 15));
 
         return button;
     }

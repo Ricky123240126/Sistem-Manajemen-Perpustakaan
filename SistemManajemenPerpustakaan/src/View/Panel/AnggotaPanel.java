@@ -42,7 +42,6 @@ public class AnggotaPanel extends JPanel {
     private int selectedId = -1;
 
     public AnggotaPanel() {
-
         anggotaController = new AnggotaController();
 
         initComponents();
@@ -50,176 +49,97 @@ public class AnggotaPanel extends JPanel {
     }
 
     private void initComponents() {
-
         setLayout(new BorderLayout());
 
         JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.setBorder(new EmptyBorder(15,15,15,15));
+        mainPanel.setBorder(new EmptyBorder(15, 15, 15, 15));
 
-        JLabel lblTitle =
-                new JLabel("Data Anggota");
+        JLabel lblTitle = new JLabel("Data Anggota");
+        lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 24));
 
-        lblTitle.setFont(
-                new Font(
-                        "Segoe UI",
-                        Font.BOLD,
-                        24
-                )
-        );
-
-        // ======================
         // FORM
-        // ======================
-        JPanel formPanel =
-                new JPanel(
-                        new GridBagLayout()
-                );
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        formPanel.setBorder(BorderFactory.createTitledBorder("Form Anggota"));
 
-        formPanel.setBorder(
-                BorderFactory.createTitledBorder(
-                        "Form Anggota"
-                )
-        );
-
-        GridBagConstraints gbc =
-                new GridBagConstraints();
-
-        gbc.insets =
-                new Insets(5,5,5,5);
-
-        gbc.fill =
-                GridBagConstraints.HORIZONTAL;
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
         txtNama = new JTextField();
         txtEmail = new JTextField();
         txtTelepon = new JTextField();
 
-        cbTipe =
-                new JComboBox<>(
-                        new String[]{
-                                "Reguler",
-                                "Premium",
-                                "VIP"
-                        }
-                );
+        cbTipe = new JComboBox<>(new String[]{
+                "Reguler",
+                "Premium",
+                "VIP"
+        });
 
-        cbStatus =
-                new JComboBox<>(
-                        new String[]{
-                                "aktif",
-                                "nonaktif"
-                        }
-                );
+        cbStatus = new JComboBox<>(new String[]{
+                "aktif",
+                "nonaktif"
+        });
 
-        gbc.gridx=0; gbc.gridy=0;
-        formPanel.add(
-                new JLabel("Nama"),
-                gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        formPanel.add(new JLabel("Nama"), gbc);
 
-        gbc.gridx=1;
-        formPanel.add(
-                txtNama,
-                gbc);
+        gbc.gridx = 1;
+        formPanel.add(txtNama, gbc);
 
-        gbc.gridx=2;
-        formPanel.add(
-                new JLabel("Email"),
-                gbc);
+        gbc.gridx = 2;
+        formPanel.add(new JLabel("Email"), gbc);
 
-        gbc.gridx=3;
-        formPanel.add(
-                txtEmail,
-                gbc);
+        gbc.gridx = 3;
+        formPanel.add(txtEmail, gbc);
 
-        gbc.gridx=0; gbc.gridy=1;
-        formPanel.add(
-                new JLabel("Telepon"),
-                gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        formPanel.add(new JLabel("Telepon"), gbc);
 
-        gbc.gridx=1;
-        formPanel.add(
-                txtTelepon,
-                gbc);
+        gbc.gridx = 1;
+        formPanel.add(txtTelepon, gbc);
 
-        gbc.gridx=2;
-        formPanel.add(
-                new JLabel("Tipe"),
-                gbc);
+        gbc.gridx = 2;
+        formPanel.add(new JLabel("Tipe"), gbc);
 
-        gbc.gridx=3;
-        formPanel.add(
-                cbTipe,
-                gbc);
+        gbc.gridx = 3;
+        formPanel.add(cbTipe, gbc);
 
-        gbc.gridx=0; gbc.gridy=2;
-        formPanel.add(
-                new JLabel("Status"),
-                gbc);
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        formPanel.add(new JLabel("Status"), gbc);
 
-        gbc.gridx=1;
-        formPanel.add(
-                cbStatus,
-                gbc);
+        gbc.gridx = 1;
+        formPanel.add(cbStatus, gbc);
 
-        // ======================
         // BUTTON
-        // ======================
-        JPanel buttonPanel =
-                new JPanel(
-                        new FlowLayout(
-                                FlowLayout.LEFT
-                        )
-                );
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-        btnTambah =
-                new JButton("Tambah");
-
-        btnEdit =
-                new JButton(
-                        "Simpan Perubahan"
-                );
-
-        btnHapus =
-                new JButton("Hapus");
-
-        btnReset =
-                new JButton("Reset");
+        btnTambah = new JButton("Tambah");
+        btnEdit = new JButton("Simpan Perubahan");
+        btnHapus = new JButton("Hapus");
+        btnReset = new JButton("Reset");
 
         buttonPanel.add(btnTambah);
         buttonPanel.add(btnEdit);
         buttonPanel.add(btnHapus);
         buttonPanel.add(btnReset);
 
-        // ======================
         // SEARCH
-        // ======================
-        JPanel searchPanel =
-                new JPanel(
-                        new FlowLayout(
-                                FlowLayout.LEFT
-                        )
-                );
+        JPanel searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-        txtCari =
-                new JTextField(20);
+        txtCari = new JTextField(20);
 
-        btnCari =
-                new JButton("Cari");
+        btnCari = new JButton("Cari");
+        btnRefresh = new JButton("Refresh");
 
-        btnRefresh =
-                new JButton("Refresh");
-
-        searchPanel.add(
-                new JLabel("Pencarian")
-        );
-
+        searchPanel.add(new JLabel("Pencarian"));
         searchPanel.add(txtCari);
         searchPanel.add(btnCari);
         searchPanel.add(btnRefresh);
 
-        // ======================
         // TABLE
-        // ======================
         String[] kolom = {
                 "ID",
                 "Nama",
@@ -229,166 +149,91 @@ public class AnggotaPanel extends JPanel {
                 "Status"
         };
 
-        tableModel =
-                new DefaultTableModel(
-                        kolom,
-                        0
-                ) {
-                    @Override
-                    public boolean isCellEditable(
-                            int row,
-                            int column) {
-                        return false;
-                    }
-                };
+        tableModel = new DefaultTableModel(kolom, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
-        tableAnggota =
-                new JTable(tableModel);
-
+        tableAnggota = new JTable(tableModel);
         tableAnggota.setRowHeight(28);
 
-        JScrollPane scrollPane =
-                new JScrollPane(
-                        tableAnggota
-                );
+        JScrollPane scrollPane = new JScrollPane(tableAnggota);
 
-        JPanel topPanel =
-                new JPanel();
-
-        topPanel.setLayout(
-                new BoxLayout(
-                        topPanel,
-                        BoxLayout.Y_AXIS
-                )
-        );
+        JPanel topPanel = new JPanel();
+        topPanel.setLayout(new BoxLayout(topPanel, BoxLayout.Y_AXIS));
 
         topPanel.add(lblTitle);
-        topPanel.add(
-                Box.createVerticalStrut(10)
-        );
+        topPanel.add(Box.createVerticalStrut(10));
         topPanel.add(formPanel);
         topPanel.add(buttonPanel);
         topPanel.add(searchPanel);
 
-        mainPanel.add(
-                topPanel,
-                BorderLayout.NORTH
-        );
-
-        mainPanel.add(
-                scrollPane,
-                BorderLayout.CENTER
-        );
+        mainPanel.add(topPanel, BorderLayout.NORTH);
+        mainPanel.add(scrollPane, BorderLayout.CENTER);
 
         add(mainPanel);
 
-        // ======================
         // EVENT
-        // ======================
-        btnTambah.addActionListener(
-                e -> tambahData()
-        );
+        btnTambah.addActionListener(e -> tambahData());
+        btnEdit.addActionListener(e -> editData());
+        btnHapus.addActionListener(e -> hapusData());
+        btnReset.addActionListener(e -> clearForm());
+        btnCari.addActionListener(e -> cariData());
+        btnRefresh.addActionListener(e -> loadData());
 
-        btnEdit.addActionListener(
-                e -> editData()
-        );
-
-        btnHapus.addActionListener(
-                e -> hapusData()
-        );
-
-        btnReset.addActionListener(
-                e -> clearForm()
-        );
-
-        btnCari.addActionListener(
-                e -> cariData()
-        );
-
-        btnRefresh.addActionListener(
-                e -> loadData()
-        );
-
-        tableAnggota
-                .getSelectionModel()
-                .addListSelectionListener(
-                        e -> {
-
-                            if(!e.getValueIsAdjusting()) {
-
-                                isiForm();
-                            }
-                        }
-                );
+        tableAnggota.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                isiForm();
+            }
+        });
     }
 
     private void loadData() {
-
         tableModel.setRowCount(0);
 
-        List<Anggota> daftar =
-                anggotaController
-                        .ambilSemuaAnggota();
+        List<Anggota> daftar = anggotaController.ambilSemuaAnggota();
 
-        for(Anggota a : daftar) {
-
-            tableModel.addRow(
-                    new Object[]{
-                            a.getId(),
-                            a.getNama(),
-                            a.getEmail(),
-                            a.getNoTelp(),
-                            a.getTipeKeanggotaan(),
-                            a.getStatus()
-                    }
-            );
+        for (Anggota a : daftar) {
+            tableModel.addRow(new Object[]{
+                    a.getId(),
+                    a.getNama(),
+                    a.getEmail(),
+                    a.getNoTelp(),
+                    a.getTipeKeanggotaan(),
+                    a.getStatus()
+            });
         }
     }
 
     private void cariData() {
-
         tableModel.setRowCount(0);
 
-        List<Anggota> daftar =
-                anggotaController
-                        .cariAnggota(
-                                txtCari.getText()
-                        );
+        List<Anggota> daftar = anggotaController.cariAnggota(txtCari.getText());
 
-        for(Anggota a : daftar) {
-
-            tableModel.addRow(
-                    new Object[]{
-                            a.getId(),
-                            a.getNama(),
-                            a.getEmail(),
-                            a.getNoTelp(),
-                            a.getTipeKeanggotaan(),
-                            a.getStatus()
-                    }
-            );
+        for (Anggota a : daftar) {
+            tableModel.addRow(new Object[]{
+                    a.getId(),
+                    a.getNama(),
+                    a.getEmail(),
+                    a.getNoTelp(),
+                    a.getTipeKeanggotaan(),
+                    a.getStatus()
+            });
         }
     }
 
     private void tambahData() {
+        boolean berhasil = anggotaController.tambahAnggota(
+                txtNama.getText(),
+                txtEmail.getText(),
+                txtTelepon.getText(),
+                cbTipe.getSelectedItem().toString()
+        );
 
-        boolean berhasil =
-                anggotaController
-                        .tambahAnggota(
-                                txtNama.getText(),
-                                txtEmail.getText(),
-                                txtTelepon.getText(),
-                                cbTipe
-                                        .getSelectedItem()
-                                        .toString()
-                        );
-
-        if(berhasil){
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Data berhasil ditambahkan"
-            );
+        if (berhasil) {
+            JOptionPane.showMessageDialog(this, "Data berhasil ditambahkan");
 
             loadData();
             clearForm();
@@ -396,38 +241,22 @@ public class AnggotaPanel extends JPanel {
     }
 
     private void editData() {
-
-        if(selectedId == -1){
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Pilih data terlebih dahulu"
-            );
-
+        if (selectedId == -1) {
+            JOptionPane.showMessageDialog(this, "Pilih data terlebih dahulu");
             return;
         }
 
-        boolean berhasil =
-                anggotaController
-                        .perbaruiAnggota(
-                                selectedId,
-                                txtNama.getText(),
-                                txtEmail.getText(),
-                                txtTelepon.getText(),
-                                cbTipe
-                                        .getSelectedItem()
-                                        .toString(),
-                                cbStatus
-                                        .getSelectedItem()
-                                        .toString()
-                        );
+        boolean berhasil = anggotaController.perbaruiAnggota(
+                selectedId,
+                txtNama.getText(),
+                txtEmail.getText(),
+                txtTelepon.getText(),
+                cbTipe.getSelectedItem().toString(),
+                cbStatus.getSelectedItem().toString()
+        );
 
-        if(berhasil){
-
-            JOptionPane.showMessageDialog(
-                    this,
-                    "Data berhasil diperbarui"
-            );
+        if (berhasil) {
+            JOptionPane.showMessageDialog(this, "Data berhasil diperbarui");
 
             loadData();
             clearForm();
@@ -435,31 +264,17 @@ public class AnggotaPanel extends JPanel {
     }
 
     private void hapusData() {
+        if (selectedId == -1) return;
 
-        if(selectedId == -1) return;
+        if (JOptionPane.showConfirmDialog(
+                this,
+                "Hapus anggota?",
+                "Konfirmasi",
+                JOptionPane.YES_NO_OPTION
+        ) == JOptionPane.YES_OPTION) {
 
-        if(
-                JOptionPane.showConfirmDialog(
-                        this,
-                        "Hapus anggota?",
-                        "Konfirmasi",
-                        JOptionPane.YES_NO_OPTION
-                )
-                ==
-                JOptionPane.YES_OPTION
-        ){
-
-            if(
-                    anggotaController
-                            .hapusAnggota(
-                                    selectedId
-                            )
-            ){
-
-                JOptionPane.showMessageDialog(
-                        this,
-                        "Data berhasil dihapus"
-                );
+            if (anggotaController.hapusAnggota(selectedId)) {
+                JOptionPane.showMessageDialog(this, "Data berhasil dihapus");
 
                 loadData();
                 clearForm();
@@ -468,51 +283,25 @@ public class AnggotaPanel extends JPanel {
     }
 
     private void isiForm() {
+        int row = tableAnggota.getSelectedRow();
 
-        int row =
-                tableAnggota.getSelectedRow();
+        if (row == -1) return;
 
-        if(row == -1) return;
-
-        selectedId =
-                Integer.parseInt(
-                        tableModel
-                                .getValueAt(
-                                        row,
-                                        0
-                                )
-                                .toString()
-                );
-
-        Anggota anggota =
-                anggotaController
-                        .cariAnggota(
-                                selectedId
-                        );
-
-        txtNama.setText(
-                anggota.getNama()
+        selectedId = Integer.parseInt(
+                tableModel.getValueAt(row, 0).toString()
         );
 
-        txtEmail.setText(
-                anggota.getEmail()
-        );
+        Anggota anggota = anggotaController.cariAnggota(selectedId);
 
-        txtTelepon.setText(
-                anggota.getNoTelp()
-        );
+        txtNama.setText(anggota.getNama());
+        txtEmail.setText(anggota.getEmail());
+        txtTelepon.setText(anggota.getNoTelp());
 
-        cbTipe.setSelectedItem(
-                anggota.getTipeKeanggotaan()
-        );
-
-        cbStatus.setSelectedItem(
-                anggota.getStatus()
-        );
+        cbTipe.setSelectedItem(anggota.getTipeKeanggotaan());
+        cbStatus.setSelectedItem(anggota.getStatus());
     }
 
     private void clearForm() {
-
         selectedId = -1;
 
         txtNama.setText("");

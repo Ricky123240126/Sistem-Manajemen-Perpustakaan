@@ -131,10 +131,7 @@ public class LoginView extends JFrame {
 
         rightPanel.add(Box.createVerticalGlue());
 
-        // ==========================
         // MAIN PANEL
-        // ==========================
-        mainPanel.add(leftPanel);
         mainPanel.add(rightPanel);
 
         add(mainPanel);
