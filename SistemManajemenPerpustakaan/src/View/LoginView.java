@@ -41,9 +41,7 @@ public class LoginView extends JFrame {
 
         JPanel mainPanel = new JPanel(new GridLayout(1, 2));
 
-        // ==========================
         // PANEL KIRI
-        // ==========================
         JPanel leftPanel = new JPanel();
         leftPanel.setBackground(new Color(30, 41, 59));
         leftPanel.setLayout(new BoxLayout(leftPanel, BoxLayout.Y_AXIS));
@@ -132,6 +130,7 @@ public class LoginView extends JFrame {
         rightPanel.add(Box.createVerticalGlue());
 
         // MAIN PANEL
+        mainPanel.add(leftPanel);
         mainPanel.add(rightPanel);
 
         add(mainPanel);

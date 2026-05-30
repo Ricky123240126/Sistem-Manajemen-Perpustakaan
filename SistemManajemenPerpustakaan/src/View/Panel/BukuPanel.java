@@ -74,10 +74,10 @@ public class BukuPanel extends JPanel {
         gbc.insets = new Insets(5, 5, 5, 5);
         gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        txtJudul = new JTextField();
-        txtPengarang = new JTextField();
-        txtISBN = new JTextField();
-        txtJumlahStok = new JTextField();
+        txtJudul = new JTextField(20);
+        txtPengarang = new JTextField(20);
+        txtISBN = new JTextField(20);
+        txtJumlahStok = new JTextField(20);
 
         cbKategori = new JComboBox<>();
 
