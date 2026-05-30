@@ -71,8 +71,7 @@ public class AnggotaPanel extends JPanel {
 
         cbTipe = new JComboBox<>(new String[]{
                 "Reguler",
-                "Premium",
-                "VIP"
+                "Premium"
         });
 
         cbStatus = new JComboBox<>(new String[]{
