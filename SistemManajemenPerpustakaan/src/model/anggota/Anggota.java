@@ -32,7 +32,7 @@ public class Anggota extends Orang{
         super(nama, email, noTelepon);
         this.tipeKeanggotaan = tipeKeanggotaan;
         this.tanggalGabung = tanggalGabung;
-        this.status = "aktif";
+        this.status = status;
     }
     
     @Override

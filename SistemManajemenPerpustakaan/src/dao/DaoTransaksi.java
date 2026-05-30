@@ -149,6 +149,8 @@ public class DaoTransaksi extends DaoInduk<Transaksi>{
         transaksi.setId(rs.getInt("id"));
         transaksi.setIdBuku(rs.getInt("id_buku"));
         transaksi.setIdAnggota(rs.getInt("id_anggota"));
+        transaksi.setJudulBuku(rs.getString("judul_buku"));       
+        transaksi.setNamaAnggota(rs.getString("nama_anggota"));
         transaksi.setTanggalPinjam(rs.getString("tanggal_pinjam"));
         transaksi.setTanggalJatuhTempo(rs.getString("tanggal_jatuh_tempo"));
         transaksi.setTanggalKembali(rs.getString("tanggal_kembali"));
