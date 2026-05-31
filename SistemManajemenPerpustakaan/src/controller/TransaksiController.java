@@ -100,8 +100,7 @@ public class TransaksiController {
         }
 
         LocalDate tanggalKembali = LocalDate.now();
-        LocalDate tanggalJatuhTempo =
-                LocalDate.parse(transaksi.getTanggalJatuhTempo());
+        LocalDate tanggalJatuhTempo = LocalDate.parse(transaksi.getTanggalJatuhTempo());
 
         long terlambatHari = ChronoUnit.DAYS.between(
                 tanggalJatuhTempo,

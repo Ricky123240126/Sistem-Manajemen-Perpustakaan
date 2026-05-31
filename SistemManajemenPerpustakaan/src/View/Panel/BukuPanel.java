@@ -355,4 +355,8 @@ public class BukuPanel extends JPanel {
 
         tableBuku.clearSelection();
     }
+    public void refreshData(){
+        loadKategori();
+        loadData();
+    }
 }

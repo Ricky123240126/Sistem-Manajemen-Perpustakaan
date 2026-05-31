@@ -20,6 +20,7 @@ public class DashboardAdmin extends JFrame {
     private JPanel contentPanel;
     private CardLayout cardLayout;
     private TransaksiPanel transaksiPanel;
+    private BukuPanel bukuPanel;
 
     public DashboardAdmin() {
         initComponents();
@@ -75,6 +76,7 @@ public class DashboardAdmin extends JFrame {
         contentPanel = new JPanel(cardLayout);
 
         contentPanel.add(new DashboardHomePanel(), "DASHBOARD");
+        bukuPanel = new BukuPanel();
         contentPanel.add(new BukuPanel(), "BUKU");
         contentPanel.add(new KategoriPanel(), "KATEGORI");
         contentPanel.add(new AnggotaPanel(), "ANGGOTA");
@@ -88,7 +90,9 @@ public class DashboardAdmin extends JFrame {
         );
 
         btnBuku.addActionListener(
-                e -> cardLayout.show(contentPanel, "BUKU")
+                e ->{bukuPanel.refreshData();
+                    cardLayout.show(contentPanel, "BUKU");
+                }                  
         );
 
         btnKategori.addActionListener(
